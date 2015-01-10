@@ -1,0 +1,46 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/application-exit.png</file>
+        <file>images/clear.png</file>
+        <file>images/connect.png</file>
+        <file>images/disconnect.png</file>
+        <file>images/settings.png</file>
+        <file>images/magneto.ico</file>
+        <file>images/megneto.png</file>
+        <file>images/stickyNotes.png</file>
+        <file>images/joystick.png</file>
+        <file>images/topology.png</file>
+        <file>images/centerSpot.png</file>
+        <file>images/rover/snap.png</file>
+        <file>images/rover/backpix.png</file>
+        <file>images/rover/frontpix.png</file>
+        <file>images/rover/leftpix.png</file>
+        <file>images/rover/leftpix0.png</file>
+        <file>images/rover/leftpix1.png</file>
+        <file>images/rover/leftpix2.png</file>
+        <file>images/rover/rightpix.png</file>
+        <file>images/rover/rightpix0.png</file>
+        <file>images/rover/rightpix1.png</file>
+        <file>images/rover/rightpix2.png</file>
+        <file>images/rover/boundary.png</file>
+        <file>images/rover/roverviewbackground.png</file>
+        <file>images/rover/droplet.png</file>
+        <file>images/rover/roverviewbackground0.png</file>
+        <file>images/rover/roverviewbackground1.png</file>
+        <file>images/plot/papertex.jpg</file>
+        <file>images/plot/plotbackground.png</file>
+        <file>images/plot/plotbeg.png</file>
+    </qresource>
+    <qresource prefix="/map">
+        <file>images/map/arrowredwhite.png</file>
+        <file>images/map/astro0.png</file>
+        <file>images/map/astro1.png</file>
+        <file>images/map/astro2.png</file>
+        <file>images/map/astro3.png</file>
+        <file>images/map/astro4.png</file>
+        <file>images/map/compass.png</file>
+        <file>images/map/path.ico</file>
+        <file>images/map/path_icon.jpg</file>
+        <file>images/map/arrowred.png</file>
+    </qresource>
+</RCC>
