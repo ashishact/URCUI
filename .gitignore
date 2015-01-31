@@ -1,2 +1,3 @@
-*.user
+.gitignore
+URCUI.pro.user
 *.user.*

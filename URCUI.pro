@@ -38,6 +38,7 @@ SOURCES += main.cpp\
     GPSMap.cpp \
     gamepad/Gamepad_private.c
 
+
 win32{
 
     SOURCES+= gamepad/Gamepad_windows_mm.c
