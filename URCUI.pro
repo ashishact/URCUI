@@ -36,17 +36,18 @@ SOURCES += main.cpp\
     appsettingsdialog.cpp \
     encodingdialog.cpp \
     GPSMap.cpp \
-    gamepad/Gamepad_private.c \
+    gamepad/Gamepad_private.c
 
-win32 {
-    SOURCES+= gamepad/Gamepad_windows_dinput.c \
-              gamepad/Gamepad_windows_mm.c
+win32{
+
+    SOURCES+= gamepad/Gamepad_windows_mm.c
+              #gamepad/Gamepad_windows_dinput.c \
 }
 linux{
-    SOURCES+= gamepad/Gamepad_linux.c \
+    SOURCES+= gamepad/Gamepad_linux.c
 }
-osx{
-    SOURCES+= gamepad/Gamepad_macosx.c \
+macx{
+    SOURCES+= gamepad/Gamepad_macosx.c
 }
 
 HEADERS  += mainwindow.h\
