@@ -19,8 +19,6 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp\
         settingsdialog.cpp \
-    gamepad/Gamepad_windows.c \
-    gamepad/Gamepad_private.c \
     joystickobject.cpp \
     joydata.cpp \
     map/ImageCache.cpp \
@@ -34,13 +32,26 @@ SOURCES += main.cpp\
     roveritem.cpp \
     map/viewgpspathdialog.cpp \
     joysticksettingdialog.cpp \
-    Library/qcustomplot/qcustomplot.cpp
+    Library/qcustomplot/qcustomplot.cpp \
+    appsettingsdialog.cpp \
+    encodingdialog.cpp \
+    GPSMap.cpp \
+    gamepad/Gamepad_private.c \
+
+win32 {
+    SOURCES+= gamepad/Gamepad_windows_dinput.c \
+              gamepad/Gamepad_windows_mm.c
+}
+linux{
+    SOURCES+= gamepad/Gamepad_linux.c \
+}
+osx{
+    SOURCES+= gamepad/Gamepad_macosx.c \
+}
 
 HEADERS  += mainwindow.h\
             settingsdialog.h \
     settingsdialog.h \
-    gamepad/Gamepad_private.h \
-    gamepad/Gamepad.h \
     joystickobject.h \
     joydata.h \
     map/ImageCache.h \
@@ -54,7 +65,12 @@ HEADERS  += mainwindow.h\
     roveritem.h \
     map/viewgpspathdialog.h \
     joysticksettingdialog.h \
-    Library/qcustomplot/qcustomplot.h
+    Library/qcustomplot/qcustomplot.h \
+    appsettingsdialog.h \
+    encodingdialog.h \
+    GPSMap.h \
+    gamepad/Gamepad.h \
+    gamepad/Gamepad_private.h
 
 FORMS    += mainwindow.ui\
             settingsdialog.ui \
@@ -64,7 +80,6 @@ FORMS    += mainwindow.ui\
     ui/urc_gpspathelement.ui \
     ui/joysticksettingdialog.ui
 
-LIBS += -gamepad/lstem_gamepad32.a -lwinmm
 
 RESOURCES += \
     UICtrl.qrc

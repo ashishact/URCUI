@@ -1,7 +1,7 @@
 #include "joystickobject.h"
 
 #include <QTimer>
-#include <gamepad/Gamepad.h>
+#include "gamepad/Gamepad.h"
 #include "joydata.h"
 
 JoyData joy;

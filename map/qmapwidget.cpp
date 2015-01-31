@@ -152,7 +152,7 @@ void QMapWidget::paintEvent(QPaintEvent *)
 
         // Draw tile bounds and numbers
         {
-            char buffer[10];
+            QString buffer;
             qint32 cx = this->m_ViewportX / 256;
             int x = -(int)(m_ViewportX % 256);
             int y = -(int)(m_ViewportY % 256);
@@ -161,7 +161,7 @@ void QMapWidget::paintEvent(QPaintEvent *)
                 painter.fillRect(x, 0, 1, this->height(), Qt::lightGray);
 
                 // Draw tile X
-                itoa((int)cx, buffer, 10);
+                buffer = QString::number((int)cx);
                 painter.drawText(x + 2, this->height() - 2, buffer);
 
                 x += 256;  cx++;
@@ -172,7 +172,7 @@ void QMapWidget::paintEvent(QPaintEvent *)
                 painter.fillRect(0, y, this->width(), 1, Qt::lightGray);
 
                 // Draw tile Y
-                itoa((int)cy, buffer, 10);
+                buffer = QString::number((int)cy);
                 painter.drawText(2, y + 12, buffer);
 
                 y += 256;  cy++;

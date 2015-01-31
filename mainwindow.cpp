@@ -131,7 +131,7 @@ void MainWindow::timerEvent()
         if(terminal_ui->terminalDriveCheckBox->isChecked()){
             temp = "Rover Drive-->";
             for(int i=0; i < data.size();i++){
-                temp.append(QString::number((byte)data.at(i)));
+                temp.append(QString::number((unsigned char)data.at(i)));
                 temp.append(" : ");
             }
             terminalString.append(temp);
@@ -159,7 +159,7 @@ void MainWindow::timerEvent()
             if(terminal_ui->terminalArmCheckBox->isChecked()){
                 temp = " Arm -> ";
                 for(int i=0; i < data.size();i++){
-                    temp.append(QString::number((byte)data.at(i)));
+                    temp.append(QString::number((unsigned char)data.at(i)));
                     temp.append(" : ");
                 }
                 terminalString.append(temp);
@@ -177,7 +177,7 @@ void MainWindow::timerEvent()
         }
         temp = " Main Camera -> ";
         for(int i=0; i < data.size();i++){
-            temp.append(QString::number((byte)data.at(i)));
+            temp.append(QString::number((unsigned char)data.at(i)));
             temp.append(" : ");
         }
         terminalString.append(temp);
@@ -193,7 +193,7 @@ void MainWindow::timerEvent()
         }
         temp = " Soil Collection -> ";
         for(int i=0; i < data.size();i++){
-            temp.append(QString::number((byte)data.at(i)));
+            temp.append(QString::number((unsigned char)data.at(i)));
             temp.append(" : ");
         }
         terminalString.append(temp);
@@ -296,7 +296,7 @@ void MainWindow::writeData(const QByteArray &data)
         QString temp ="";
 
         for(int i=0; i < data.size();i++){
-            temp.append(QString::number((byte)data.at(i)));
+            temp.append(QString::number(data.at(i)));
             temp.append(" : ");
         }
         terminalString.append(temp);
