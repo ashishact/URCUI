@@ -74,8 +74,8 @@ public:
 
     struct JoySetting{
         int throttleAxis, turnAxis,
-//            armAct1_Positive_Btn, armAct2_Positive_Btn, armAct3_Positive_Btn,
-//            armAct1_Negetive_Btn, armAct2_Negetive_Btn, armAct3_Negetive_Btn,
+            armAct1_Positive_Btn, armAct2_Positive_Btn, armAct3_Positive_Btn,
+            armAct1_Negetive_Btn, armAct2_Negetive_Btn, armAct3_Negetive_Btn,
             armAct1_Axis, armAct2_Axis, armAct3_Axis,
 
             armDigger_Positive_Btn, armDigger_Negetive_Btn,// armDiggerAxis,

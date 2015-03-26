@@ -25,7 +25,7 @@
 
 #define USE_TCP_SERVER 0
 
-#define BLACKBOX_ENABLE 1
+#define BLACKBOX_ENABLE 0
 
 //#include <QDebug>
 
@@ -335,25 +335,69 @@ void MainWindow::readData()
 QByteArray MainWindow::encodeData(const int type)
 {
     QByteArray data;
+    unsigned int bi;
     switch(type)
     {
         //***************************************************************
         case 0: // Motor Driver
             data.append(DELIMETER);
-            data.append(181);
+            data.append(59);
             data.append(roverdata->rover.motordriver.throttle);
             data.append(roverdata->rover.motordriver.turnAngle);
             break;
         //***************************************************************
         case 1: // Arm
             data.append(DELIMETER);
-            data.append(191);// identifier
-            data.append(roverdata->rover.roboarm.act1Direction);
-            data.append(roverdata->rover.roboarm.act2Direction);
-            data.append(roverdata->rover.roboarm.act3Direction);
-            data.append(roverdata->rover.roboarm.digger);
-            data.append(roverdata->rover.roboarm.gripperAct1);
-            data.append(roverdata->rover.roboarm.gripperAct2);
+            data.append(63);// identifier
+            bi = 0;
+            if (roverdata->rover.roboarm.act1Direction == 2){
+                bi += 1;
+            }
+            else if (roverdata->rover.roboarm.act1Direction == 1){
+                bi+= 2;
+            }
+
+            if (roverdata->rover.roboarm.act2Direction == 2){
+                bi += 4;
+            }
+            else if (roverdata->rover.roboarm.act2Direction == 1){
+                bi += 8;
+            }
+
+            if (roverdata->rover.roboarm.act3Direction == 2){
+                bi += 16;
+            }
+            else if (roverdata->rover.roboarm.act3Direction == 1){
+                bi += 32;
+            }
+            data.append(bi);
+
+            bi=0;
+            if (roverdata->rover.roboarm.digger == 2){
+                bi += 1;
+            }
+            else if (roverdata->rover.roboarm.digger == 1){
+                bi += 2;
+            }
+            data.append(bi);
+
+            bi=0;
+            if (roverdata->rover.roboarm.gripperAct1 == 2){
+                bi += 1;
+            }
+            else if (roverdata->rover.roboarm.gripperAct1 == 1){
+                bi += 2;
+            }
+
+            if (roverdata->rover.roboarm.gripperAct2 == 2){
+                bi += 4;
+            }
+            else if (roverdata->rover.roboarm.gripperAct2 == 1){
+                bi += 8;
+            }
+            data.append(bi);
+
+
             break;
         //****************************************************************
         case 2: // Camera
@@ -411,7 +455,7 @@ void MainWindow::decodeData()
                     if(lon > 180){
                         QString temp="";
                         for(int i=0; i < comportdata.size();i++){
-                            temp.append(QString::number(i)+" -> "+QString::number((byte)comportdata.at(i)));
+                            temp.append(QString::number(i)+" -> "+QString::number((unsigned char)comportdata.at(i)));
                             temp.append(" \n ");
                         }
                        qDebug()<<temp;
@@ -592,7 +636,7 @@ void MainWindow::joyEvent(unsigned int deviceID, bool btnEvent,unsigned int axis
 
     float axisValue = joy.axis[deviceID][axisNo];
     Datas::JoySetting *joyS = &(roverdata->rover.joysetting);
-#define ARMACTUATOR_USE_BTN 0
+#define ARMACTUATOR_USE_BTN 1
 #define DIGGER_USE_BTN 1
     if(deviceID == 0){// 1st joystick
 
@@ -601,10 +645,10 @@ void MainWindow::joyEvent(unsigned int deviceID, bool btnEvent,unsigned int axis
 #if ARMACTUATOR_USE_BTN
             // actuator 1
             if(joy.button[0][joyS->armAct1_Positive_Btn]){   // button 3
-                roverdata->rover.roboarm.act1Direction = 19;   // act1 +
+                roverdata->rover.roboarm.act1Direction = 2;   // act1 +
             }
             else if(joy.button[0][joyS->armAct1_Negetive_Btn]){   // device 1 button 0
-                roverdata->rover.roboarm.act1Direction = 11;   // act1 -
+                roverdata->rover.roboarm.act1Direction = 1;   // act1 -
             }
             else {
                 roverdata->rover.roboarm.act1Direction = 0;   // act1 no Movement // So don't send anything
@@ -612,10 +656,10 @@ void MainWindow::joyEvent(unsigned int deviceID, bool btnEvent,unsigned int axis
 
             // actuator 2
             if(joy.button[0][joyS->armAct2_Positive_Btn]){   // device 1 button 1
-                roverdata->rover.roboarm.act2Direction = 29;   // act2 +
+                roverdata->rover.roboarm.act2Direction = 2;   // act2 +
             }
             else if(joy.button[0][joyS->armAct2_Negetive_Btn]){   // device 1 button 2
-                roverdata->rover.roboarm.act2Direction = 21;   // act2 -
+                roverdata->rover.roboarm.act2Direction = 1;   // act2 -
             }
             else {
                 roverdata->rover.roboarm.act2Direction = 0;   // act2 no Movement // So don't send anything
@@ -624,10 +668,10 @@ void MainWindow::joyEvent(unsigned int deviceID, bool btnEvent,unsigned int axis
 //******************************************//
             // actuator 3
             if(joy.button[0][joyS->armAct3_Positive_Btn]){   // device 1 button 4
-                roverdata->rover.roboarm.act3Direction = 39;   // act3 +
+                roverdata->rover.roboarm.act3Direction = 2;   // act3 +
             }
             else if(joy.button[0][joyS->armAct3_Negetive_Btn]){   // device 1 button 5
-                roverdata->rover.roboarm.act3Direction = 31;   // act3 -
+                roverdata->rover.roboarm.act3Direction = 1;   // act3 -
             }
             else {
                 roverdata->rover.roboarm.act3Direction = 0;   // act3 no Movement // So don't send anything
@@ -636,28 +680,28 @@ void MainWindow::joyEvent(unsigned int deviceID, bool btnEvent,unsigned int axis
 //********************************************//
 #if DIGGER_USE_BTN
             if(joy.button[0][joyS->armDigger_Positive_Btn]){
-                roverdata->rover.roboarm.digger = 49;
+                roverdata->rover.roboarm.digger = 2;
             }
             else if(joy.button[0][joyS->armDigger_Negetive_Btn]){
-                roverdata->rover.roboarm.digger = 41;
+                roverdata->rover.roboarm.digger = 1;
             }
             else roverdata->rover.roboarm.digger = 0;
 #endif
 //*****************************************// gripper act 1
             if(joy.button[0][joyS->armGripper_Act_1_Positive_Btn]){
-                roverdata->rover.roboarm.gripperAct1 = 59;
+                roverdata->rover.roboarm.gripperAct1 = 2;
             }
             else if(joy.button[0][joyS->armGripper_Act_1_Negetive_Btn]){
-                roverdata->rover.roboarm.gripperAct1 = 51;
+                roverdata->rover.roboarm.gripperAct1 = 1;
             }
             else{
                 roverdata->rover.roboarm.gripperAct1 = 0;
             }
             if(joy.button[0][joyS->armGripper_Act_2_Positive_Btn]){// gripper act 2
-                roverdata->rover.roboarm.gripperAct2 = 69;
+                roverdata->rover.roboarm.gripperAct2 = 2;
             }
             else if(joy.button[0][joyS->armGripper_Act_2_Negetive_Btn]){
-                roverdata->rover.roboarm.gripperAct2 = 61;
+                roverdata->rover.roboarm.gripperAct2 = 1;
             }
             else{
                 roverdata->rover.roboarm.gripperAct2 = 0;
@@ -674,12 +718,12 @@ void MainWindow::joyEvent(unsigned int deviceID, bool btnEvent,unsigned int axis
         else{   // axis
             if(axisNo == joyS->throttleAxis){
                 if(axisValue < 0)  // forward
-                    roverdata->rover.motordriver.throttle = 1 - axisValue*(MAXBVALUE/2 - 1);
+                    roverdata->rover.motordriver.throttle = 100 - axisValue*(99);
                 else                // backward
-                    roverdata->rover.motordriver.throttle = MAXBVALUE/2 + 1 + axisValue*(MAXBVALUE/2 - 1);
+                    roverdata->rover.motordriver.throttle = axisValue*99;
             }
             else if(axisNo == joyS->turnAxis){
-                roverdata->rover.motordriver.turnAngle =1 + ( (axisValue+1)/2 )*249;
+                roverdata->rover.motordriver.turnAngle =(axisValue+1)*100;
             }
 //***************************************************//
 #if DIGGER_USE_BTN == 0

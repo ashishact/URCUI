@@ -62,13 +62,13 @@ Datas::Datas()
 
     rover.joysetting.soilColl_Assembly_Rotate_Povitive_Btn = 0;
     rover.joysetting.soilColl_Assembly_Rotate_Negetive_Btn = 2;
-    /*
+
     rover.joysetting.armAct1_Positive_Btn = 3;
     rover.joysetting.armAct1_Negetive_Btn = 1;
     rover.joysetting.armAct2_Positive_Btn = 0;
     rover.joysetting.armAct2_Negetive_Btn = 2;
     rover.joysetting.armAct3_Positive_Btn = 0;
-    rover.joysetting.armAct3_Negetive_Btn = 2;*/
+    rover.joysetting.armAct3_Negetive_Btn = 2;
 //    rover.joysetting.armDiggerAxis = -1;
 //    rover.joysetting.soilColl_Assembly_Rotate_Axis = 5;
 
