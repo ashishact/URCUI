@@ -4,7 +4,6 @@ UI for controlling the Mars rover build by IIT Bombay Mars Rover Team for the Un
 
 
 
-Requirements to build
---------------------
-Need QT 5 or above
+## Requirements
+QT 5 or above
 Open the project file (URCUI.pro) with QT creator and build and run
